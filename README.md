@@ -1,0 +1,1 @@
+# MERN Mock Test App\nSee backend/README.md and frontend/README.md for more.\n
