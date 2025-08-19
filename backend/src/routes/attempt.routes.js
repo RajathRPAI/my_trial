@@ -1,0 +1,11 @@
+const router = require('express').Router();
+const auth = require('../utils/auth.middleware');
+const admin = require('../utils/admin.middleware');
+const ctrl = require('../controllers/attempt.controller');
+router.post('/start', auth, ctrl.start);
+router.post('/autosave', auth, ctrl.autosave);
+router.post('/submit', auth, ctrl.submit);
+router.get('/:id', auth, ctrl.getOne);
+router.get('/me', auth, ctrl.listForUser);
+router.get('/', auth, admin, ctrl.listAll);
+module.exports = router;
