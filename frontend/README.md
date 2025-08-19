@@ -1,0 +1,1 @@
+# Backend for MERN Mock Test App\nSee project root README for instructions.\n

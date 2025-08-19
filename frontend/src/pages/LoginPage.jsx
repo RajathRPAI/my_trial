@@ -1,0 +1,3 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+export default function LoginPage(){ const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const doLogin=()=>{ axios.post((process.env.REACT_APP_API_URL||'http://localhost:5000/api')+'/auth/login',{ email, password }).then(r=>{ localStorage.setItem('token', r.data.token); localStorage.setItem('role', r.data.user.role); window.location='/dashboard'; }).catch(e=>alert('Login failed')); }; return (<div className='p-4'><h2>Login</h2><input placeholder='Email' value={email} onChange={e=>setEmail(e.target.value)} /><input placeholder='Password' type='password' value={password} onChange={e=>setPassword(e.target.value)} /><button onClick={doLogin}>Login</button></div>); }

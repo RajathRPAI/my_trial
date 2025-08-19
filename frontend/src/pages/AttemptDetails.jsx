@@ -1,0 +1,4 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+export default function AttemptDetails(){ const { id } = useParams(); const [attempt,setAttempt]=useState(null); useEffect(()=>{ const API=axios.create({ baseURL: process.env.REACT_APP_API_URL||'http://localhost:5000/api' }); const token=localStorage.getItem('token'); if(token) API.defaults.headers.common['Authorization']='Bearer '+token; API.get(`/attempts/${id}`).then(r=>setAttempt(r.data)).catch(()=>{}); },[id]); if(!attempt) return <div>Loading...</div>; return (<div className='p-4'><h1>Attempt</h1><div>Mock: {attempt.mock?.title}</div><div>Score: {attempt.score}</div><ul>{attempt.responses.map((r,idx)=>(<li key={idx} className='border p-2 mb-1'>Q: {r.question?.stem}<br/>Your: {JSON.stringify(r.answer)}<br/>Correct: {r.correct? 'Yes':'No'}</li>))}</ul></div>); }
